@@ -10,11 +10,11 @@
 <main>
   <header>
     <div>
-      <p class="eyebrow">LOCAL MOCK PROTOTYPE</p>
+      <p class="eyebrow">LOCAL CANONICAL DATA PROTOTYPE</p>
       <h1>Level 2 Personnel Search</h1>
-      <p>No Apps Script connection. Safe for VS Code Live Server.</p>
+      <p>Uses personnel-canonical-data.json. No Apps Script connection.</p>
     </div>
-    <span class="badge">local-v0.1</span>
+    <span class="badge">local-v0.2</span>
   </header>
 
   <section class="panel">
@@ -63,10 +63,9 @@
         <tbody id="resultsBody"></tbody>
       </table>
     </div>
-    <div id="emptyState" class="empty">Enter search terms to begin.</div>
+    <div id="emptyState" class="empty">Loading canonical personnel data…</div>
   </section>
 </main>
-<script src="mock-personnel.js"></script>
 <script src="search-engine.js"></script>
 <script src="app.js"></script>
 </body>
