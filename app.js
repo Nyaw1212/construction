@@ -62,9 +62,9 @@
   function setActiveGroup(index) {
     activeGroupIndex = index == null ? null : Number(index);
     document.querySelectorAll("[data-term-index]").forEach(node => {
-      const isActive = activeGroupIndex == null || Number(node.dataset.termIndex) === activeGroupIndex;
+      const isActive = Number(node.dataset.termIndex) === activeGroupIndex;
       node.classList.toggle("group-focus", activeGroupIndex != null && isActive);
-      node.classList.toggle("group-dim", activeGroupIndex != null && !isActive);
+      node.classList.remove("group-dim");
     });
   }
 
@@ -151,7 +151,7 @@
         data-term-index="${item.termIndex}"
         style="--group-hue:${groupHue(item.termIndex)}"
         tabindex="0"
-        title="Hover to isolate the ${esc(item.term)} match group"
+        title="Hover to highlight the ${esc(item.term)} match group"
       >
         <td>${index + 1}</td>
         <td><span class="term-marker">${esc(item.term)}</span></td>
