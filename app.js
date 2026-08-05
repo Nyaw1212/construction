@@ -36,17 +36,20 @@
     return GROUP_HUES[index % GROUP_HUES.length];
   }
 
-  function renderMatchedPills(terms) {
-    e.matched.innerHTML = terms.length
-      ? terms.map((term, index) => `
-          <span
-            class="pill match-pill"
-            data-term-index="${index}"
-            style="--group-hue:${groupHue(index)}"
-            tabindex="0"
-            title="Highlight only the ${esc(term)} result group"
-          >${esc(term)}</span>
-        `).join("")
+  function renderMatchedPills(allTerms, matchedTerms) {
+    e.matched.innerHTML = matchedTerms.length
+      ? matchedTerms.map(term => {
+          const originalTermIndex = allTerms.indexOf(term);
+          return `
+            <span
+              class="pill match-pill"
+              data-term-index="${originalTermIndex}"
+              style="--group-hue:${groupHue(originalTermIndex)}"
+              tabindex="0"
+              title="Highlight only the ${esc(term)} result group"
+            >${esc(term)}</span>
+          `;
+        }).join("")
       : "None";
   }
 
@@ -126,7 +129,7 @@
     e.terms.textContent = result.terms.length;
     e.matches.textContent = result.matches.length;
     e.elapsed.textContent = `${result.elapsedMs.toFixed(2)} ms`;
-    renderMatchedPills(result.matchedTerms);
+    renderMatchedPills(result.terms, result.matchedTerms);
     renderUnmatchedPills(result.unmatchedTerms);
     e.sort.textContent = e.order.checked
       ? "term order → quality → LIST order"
