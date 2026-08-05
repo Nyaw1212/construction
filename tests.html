@@ -1,0 +1,7 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Level 2 Tests</title><style>body{font-family:system-ui;background:#101512;color:#eafff3;padding:24px}.pass{color:#5deda8}.fail{color:#ff8d8d}</style></head><body><h1>Level 2 Search Tests</h1><div id="out"></div><script src="mock-personnel.js"></script><script src="search-engine.js"></script><script>
+const out=document.getElementById("out");function test(name,ok,detail=""){const p=document.createElement("p");p.className=ok?"pass":"fail";p.textContent=`${ok?"PASS":"FAIL"} — ${name}${detail?": "+detail:""}`;out.appendChild(p)}
+const p=Level2Search.parseTerms("Chiao\nSantos\nchiao; Cruz");test("Deduplicate terms",p.join("|")==="chiao|santos|cruz",p.join("|"));
+const o=Level2Search.searchPersonnel(MOCK_PERSONNEL,"Cruz\nChiao",{mode:"ANY",preserveInputOrder:true,exactPriority:true});test("Preserve input order",o.matches[0]?.term==="cruz"&&o.matches.at(-1)?.term==="chiao",o.matches.map(x=>x.term).join(", "));
+const x=Level2Search.searchPersonnel(MOCK_PERSONNEL,"ALVIN GREG A CHIAO",{mode:"ANY",preserveInputOrder:true,exactPriority:true});test("Exact ranks first",x.matches[0]?.record.canonicalName==="ALVIN GREG A CHIAO",x.matches[0]?.record.canonicalName||"none");
+const u=Level2Search.searchPersonnel(MOCK_PERSONNEL,"Chiao\nNobody Exists",{mode:"ANY"});test("Unmatched term report",u.unmatchedTerms.includes("nobody exists"),u.unmatchedTerms.join(", "));
+</script></body></html>

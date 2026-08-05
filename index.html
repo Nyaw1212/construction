@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 2 Personnel Search</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <p class="eyebrow">LOCAL MOCK PROTOTYPE</p>
+      <h1>Level 2 Personnel Search</h1>
+      <p>No Apps Script connection. Safe for VS Code Live Server.</p>
+    </div>
+    <span class="badge">local-v0.1</span>
+  </header>
+
+  <section class="panel">
+    <div class="search-box">
+      <label for="searchInput">Search terms</label>
+      <textarea id="searchInput" rows="7" placeholder="Chiao&#10;Santos&#10;Cruz"></textarea>
+      <small>Use new lines, commas, or semicolons.</small>
+    </div>
+
+    <div class="controls">
+      <label><input type="radio" name="mode" value="ANY" checked> Match ANY</label>
+      <label><input type="radio" name="mode" value="ALL"> Match ALL</label>
+      <label><input id="preserveOrder" type="checkbox" checked> Preserve input order</label>
+      <label><input id="exactPriority" type="checkbox" checked> Exact canonical priority</label>
+      <button id="runSearch">Run Search</button>
+      <button id="loadDemo" class="secondary">Load Demo</button>
+      <button id="clearSearch" class="ghost">Clear</button>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div><strong id="recordCount">0</strong><span>records</span></div>
+    <div><strong id="termCount">0</strong><span>terms</span></div>
+    <div><strong id="matchCount">0</strong><span>matches</span></div>
+    <div><strong id="elapsed">0 ms</strong><span>time</span></div>
+  </section>
+
+  <section class="feedback">
+    <article><h2>Matched terms</h2><div id="matchedTerms">None</div></article>
+    <article><h2>Unmatched terms</h2><div id="unmatchedTerms">None</div></article>
+  </section>
+
+  <section class="results">
+    <div class="results-head">
+      <h2>Results</h2>
+      <span id="sortDescription"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>Term</th><th>Quality</th><th>Display name</th>
+            <th>Canonical name</th><th>Rank</th><th>Office</th><th>Camp</th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </div>
+    <div id="emptyState" class="empty">Enter search terms to begin.</div>
+  </section>
+</main>
+<script src="mock-personnel.js"></script>
+<script src="search-engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
